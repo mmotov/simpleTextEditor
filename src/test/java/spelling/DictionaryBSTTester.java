@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 import java.util.LinkedList;
 
 import org.junit.Before;
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 /**
  * @author UC San Diego MOOC team

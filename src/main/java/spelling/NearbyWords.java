@@ -131,16 +131,29 @@ public class NearbyWords implements SpellingSuggest {
 
         // initial variables
         List<String> queue = new LinkedList<String>();     // String to explore
-        HashSet<String> visited = new HashSet<String>();   // to avoid exploring the same
-        // string multiple times
+        HashSet<String> visited = new HashSet<String>();   // to avoid exploring the same string multiple times
         List<String> retList = new LinkedList<String>();   // words to return
-
 
         // insert first node
         queue.add(word);
         visited.add(word);
 
-        // TODO: Implement the remainder of this method, see assignment for algorithm
+        int attempts = 0;
+        while (!queue.isEmpty() && numSuggestions != 0 && attempts < THRESHOLD) {
+            attempts++;
+            String currentWord = queue.remove(0);
+            List<String> neighbors = distanceOne(currentWord, true);
+            for (String n : neighbors) {
+                if (!visited.contains(n)) {
+                    visited.add(n);
+                    queue.add(n);
+                    if (dict.isWord(n)) {
+                        retList.add(n);
+                        numSuggestions--;
+                    }
+                }
+            }
+        }
 
         return retList;
 
